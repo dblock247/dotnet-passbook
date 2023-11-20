@@ -1,25 +1,21 @@
 ﻿using System.IO;
 
-namespace Passbook.Generator
+namespace Passbook.Generator;
+
+public class Pass
 {
-    public class Pass
+    private readonly string _packagePathAndName;
+
+    public Pass(string packagePathAndName)
     {
-        private string packagePathAndName;
-
-        public Pass(string packagePathAndName)
-        {
-            this.packagePathAndName = packagePathAndName;
-        }
-
-        public byte[] GetPackage()
-        {
-            byte[] contents = File.ReadAllBytes(packagePathAndName);
-            return contents;
-        }
-
-        public string PackageDirectory
-        {
-            get { return Path.GetDirectoryName(this.packagePathAndName); }
-        }
+        _packagePathAndName = packagePathAndName;
     }
+
+    public byte[] GetPackage()
+    {
+        var contents = File.ReadAllBytes(_packagePathAndName);
+        return contents;
+    }
+
+    public string PackageDirectory => Path.GetDirectoryName(_packagePathAndName);
 }
